@@ -231,6 +231,9 @@ class DataParallelPPOActor(BasePPOActor):
             self.actor_optimizer.zero_grad()
 
             for data in micro_batches:
+                # TODO (tianbing)
+                # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                # data = data.to(device)  # Ensures data is moved correctly
                 data = data.cuda()  # actor device is cpu when using offload
                 responses = data['responses']
                 response_length = responses.size(1)
@@ -274,6 +277,7 @@ class DataParallelPPOActor(BasePPOActor):
                 data = {
                     'actor/entropy_loss': entropy_loss.detach().item(),
                     'actor/pg_loss': pg_loss.detach().item(),
+                    'actor/loss': loss.detach().item(),
                     'actor/pg_clipfrac': pg_clipfrac.detach().item(),
                     'actor/ppo_kl': ppo_kl.detach().item(),
                 }
