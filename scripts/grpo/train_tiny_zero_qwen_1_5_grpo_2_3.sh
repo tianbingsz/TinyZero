@@ -23,8 +23,6 @@ echo "Experiment Name: $EXPERIMENT_NAME"
 echo "Attention Backend: $VLLM_ATTENTION_BACKEND"
 
 
-export VLLM_ATTENTION_BACKEND=XFORMERS
-
 python3 -m verl.trainer.main_grpo \
     algorithm.adv_estimator=grpo \
     data.train_files=$DATA_DIR/train.parquet \
