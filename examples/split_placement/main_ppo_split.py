@@ -132,7 +132,8 @@ def main_task(config):
     else:
         raise NotImplementedError
 
-    from verl.trainer.ppo.ray_trainer import ResourcePoolManager, Role
+    from verl.trainer.ppo.ray_trainer import ResourcePoolManager
+    from verl.trainer.core_algos import Role
 
     role_worker_mapping = {
         Role.ActorRollout: ray.remote(ActorRolloutRefWorker),

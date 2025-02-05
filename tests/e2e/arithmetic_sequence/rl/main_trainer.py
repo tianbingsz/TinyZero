@@ -127,7 +127,8 @@ def main(config):
 
     # define worker classes
     from verl.workers.fsdp_workers import ActorRolloutRefWorker, CriticWorker
-    from verl.trainer.ppo.ray_trainer import ResourcePoolManager, Role
+    from verl.trainer.ppo.ray_trainer import ResourcePoolManager
+    from verl.trainer.core_algos import Role
 
     role_worker_mapping = {
         Role.ActorRollout: ray.remote(ActorRolloutRefWorker),

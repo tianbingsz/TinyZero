@@ -15,14 +15,27 @@
 """
 Core functions to implement PPO algorithms.
 The function implemented in this file should be used by trainer with different distributed strategies to
-implement PPO
+implement PPO and GRPO
 """
 
 import numpy as np
+from enum import Enum
 import torch
 from collections import defaultdict
 
 import verl.utils.torch_functional as verl_F
+
+class Role(Enum):
+    """
+    To create more roles dynamically, you can subclass Role and add new members
+    """
+    Actor = 0
+    Rollout = 1
+    ActorRollout = 2
+    Critic = 3
+    RefPolicy = 4
+    RewardModel = 5
+    ActorRolloutRef = 6
 
 
 class AdaptiveKLController:

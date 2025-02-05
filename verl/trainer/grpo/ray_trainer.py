@@ -20,7 +20,6 @@ import os
 import uuid
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from enum import Enum
 from pprint import pprint
 from typing import Type, Dict
 
@@ -32,23 +31,11 @@ from verl.protocol import pad_dataproto_to_divisor, unpad_dataproto
 from verl.single_controller.base import Worker
 from verl.single_controller.ray import RayResourcePool, RayWorkerGroup, RayClassWithInitArgs
 from verl.single_controller.ray.base import create_colocated_worker_cls
-from verl.trainer.ppo import core_algos
+from verl.trainer import core_algos
+from verl.trainer.core_algos import Role
 from verl.utils.seqlen_balancing import get_seqlen_balanced_partitions, log_seqlen_unbalance
 
 WorkerType = Type[Worker]
-
-
-class Role(Enum):
-    """
-    To create more roles dynamically, you can subclass Role and add new members
-    """
-    Actor = 0
-    Rollout = 1
-    ActorRollout = 2
-    Critic = 3
-    RefPolicy = 4
-    RewardModel = 5
-    ActorRolloutRef = 6
 
 
 @dataclass
